@@ -6,6 +6,7 @@
   <title>WONDER in EKODA</title>
   <meta name="description" content="Wonder in Ekoda 公式サイト" />
 
+  <script>document.documentElement.classList.add('js');</script>
   <!-- ===== favicon ===== -->
   <link rel="icon" href="assets/images/favicon.svg?v=2" type="image/svg+xml">
   <link rel="icon" type="image/png" href="assets/images/favicon-32.png?v=3" sizes="32x32">
@@ -316,7 +317,12 @@
       <div class="hero__bg c"></div>
     </section>
 
-    <div class="accent"></div>
+    <div class="accent" aria-hidden="true"></div>
+    <!-- <div class="accent" aria-hidden="true">
+      <video class="accent__video" autoplay muted playsinline loop="true" preload="metadata">
+          <source src="assets/images/movHoloAnim_lp.mp4" type="video/mp4">
+      </video>
+    </div> -->
 
     <!-- ========== SPmenu ========== -->
     <section class="menu sp">
@@ -331,18 +337,10 @@
     </section>
 
     <!-- ========== ABOUT ========== -->
-    <section class="section section--about bg--white" id="about">
+    <section class="section section--about bg--white js-reveal" id="about">
       <header class="section__head">
         <div class="sectionTitle">
-          <h2 class="sectionTitle__text" data-title="ABOUT">ABOUT</h2>
-          <!-- 一文字づつアニメーションさせるために分離する場合は下記のスタイルをとる。いったん置き -->
-          <!-- <div class="test">
-            <span class="sectionTitle__text">A</span>
-            <span class="sectionTitle__text">B</span>
-            <span class="sectionTitle__text">O</span>
-            <span class="sectionTitle__text">U</span>
-            <span class="sectionTitle__text">T</span>
-          </div> -->
+          <h2 class="sectionTitle__text type-js" data-title="ABOUT">ABOUT</h2>
           <span class="sectionTitle__ghost" aria-hidden="true">ABOUT</span>
         </div>
         <p class="lead">
@@ -483,11 +481,11 @@
 
 
     <!-- ========== ACCESS ========== -->
-    <section class="section section--access" id="access">
+    <section class="section section--access js-reveal" id="access">
       <div class="access__wrap--pc">
         <header class="section__head access__info--pc">
           <div class="sectionTitle sectionTitle--access">
-            <h2 class="sectionTitle__text">ACCESS</h2>
+            <h2 class="sectionTitle__text type-js">ACCESS</h2>
             <span class="sectionTitle__ghost" aria-hidden="true">ACCESS</span>
           </div>
           <p class="lead lead--access">西武池袋線 江古田駅 南口から徒歩1分</p>
@@ -537,10 +535,10 @@
 
 
     <!-- ========== SERVICE ========== -->
-    <section class="section bg--white" id="service">
+    <section class="section bg--white js-reveal" id="service">
       <header class="section__head">
         <div class="sectionTitle">
-          <h2 class="sectionTitle__text">SERVICE</h2>
+          <h2 class="sectionTitle__text type-js">SERVICE</h2>
           <span class="sectionTitle__ghost test" aria-hidden="true">SERVICE</span>
         </div>
         <p class="lead lead--service">
@@ -582,10 +580,10 @@
 
 
     <!-- ========== Q&A ========== -->
-    <section class="section section--alt" id="qa">
+    <section class="section section--alt js-reveal" id="qa">
       <header class="section__head">
         <div class="sectionTitle sectionTitle--qa">
-          <h2 class="sectionTitle__text">Q&amp;A</h2>
+          <h2 class="sectionTitle__text type-js">Q&amp;A</h2>
           <span class="sectionTitle__ghost" aria-hidden="true">Q&amp;A</span>
         </div>
           <h3 class="subTitle subTitle--qa">よくある質問</h3>
@@ -652,11 +650,11 @@
     </section>
 
     <!-- ========== NEWS ========== -->
-    <section class="section section--news bg--white" id="news">
+    <section class="section section--news bg--white js-reveal" id="news">
       <div class="news__wrap">
         <header class="section__head">
           <div class="sectionTitle sectionTitle--news">
-            <h2 class="sectionTitle__text">NEWS</h2>
+            <h2 class="sectionTitle__text type-js">NEWS</h2>
             <span class="sectionTitle__ghost" aria-hidden="true">NEWS</span>
           </div>
           <p class="lead sp">
@@ -675,10 +673,10 @@
     </section>
   </main>
 
-  <div class="accent accent--var01"></div>
+  <div class="accent accent--var01" aria-hidden="true"></div>
 
   <!-- ========== Footer ========== -->
-  <footer class="footer">
+  <footer class="footer js-reveal">
     <div class="footer__wrap">
       <div class="footer__top">
         <p class="sectionTitle__text sectionTitle__text--footer">WONDER <span>in</span> EKODA</p>
