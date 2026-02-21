@@ -21,6 +21,7 @@
 
   <!-- ===== CSS ===== -->
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 </head>
 
@@ -32,9 +33,10 @@
       </div>
 
       <!-- ===== navigation menu ===== -->
-    <div class="menu">
-      <nav class="gnav pc" aria-label="グローバルナビゲーション(PCmenu)">
+    <div class="menu pc">
+      <nav class="gnav" aria-label="グローバルナビゲーション(PCmenu)">
         <ul class="gnav__list">
+          <li class="gnav__item"><a href="#about">ABOUT</a></li>
           <li class="gnav__item"><a href="#access">ACCESS</a></li>
           <li class="gnav__item"><a href="#service">SERVICE</a></li>
           <li class="gnav__item"><a href="#qa">Q&A</a></li>
@@ -56,7 +58,7 @@
             <span class="visually-hidden">WONDER in EKODA</span>
             <div class="hero__logo">
               <!-- inlineSVG-SP -->
-              <svg class="sp" id="_レイヤー_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 175.02">
+              <svg class="sp svg--shadow" id="_レイヤー_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 175.02">
                 <!-- Generator: Adobe Illustrator 29.8.2, SVG Export Plug-In . SVG Version: 2.1.1 Build 3)  -->
                 <defs>
                   <style>
@@ -230,7 +232,7 @@
                 </g>
               </svg>
               <!-- inlineSVG-PC -->
-               <svg class="pc" width="520" height="75" viewBox="15 -5 517 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <svg class="pc svg--shadow" width="520" height="75" viewBox="15 -5 517 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 68.321L4.5555 0.615505H17.993L14.246 43.3546L25.6492 0.615505H38.4618L34.5976 43.3546L45.8055 0.615505H59.3993L39.9609 68.321H23.4766L25.7844 35.7378L16.7578 68.321H0Z" fill="url(#paint0_linear_370_484)"/>
                 <path d="M71.0602 68.9365C65.5654 68.9365 61.6469 67.308 59.3045 64.051C56.9927 60.7683 56.3817 56.0366 57.4715 49.8559L63.1422 17.6958C64.1642 11.8998 66.372 7.50147 69.7657 4.50088C73.1854 1.50029 77.6687 0 83.2156 0C88.7625 0 92.7037 1.50029 95.0392 4.50088C97.4007 7.50147 98.0705 11.8998 97.0485 17.6958L91.3778 49.8559C90.288 56.0366 87.9953 60.7683 84.4998 64.051C81.0349 67.308 76.555 68.9365 71.0602 68.9365ZM73.3751 56.4726C75.4585 56.4726 76.8506 54.485 77.5515 50.5099L83.3782 17.4649C83.9661 14.131 83.2444 12.464 81.2132 12.464C78.9215 12.464 77.4749 14.1694 76.8735 17.5804L71.0536 50.5868C70.6828 52.6898 70.6764 54.2029 71.0344 55.1262C71.397 56.0238 72.1772 56.4726 73.3751 56.4726Z" fill="url(#paint1_linear_370_484)"/>
                 <path d="M96.8688 68.321L108.807 0.615505H122.948L123.558 33.0449L129.276 0.615505H142.557L130.619 68.321H117.181L116.275 34.4683L110.306 68.321H96.8688Z" fill="url(#paint2_linear_370_484)"/>
@@ -299,8 +301,7 @@
                 </linearGradient>
                 </defs>
               </svg>
-
-            </div>
+                          </div>
           </h2>
         </div>
 
@@ -310,6 +311,9 @@
             Xで最新情報を見る</a>
         </div>
       </div>
+      <div class="hero__bg a is-active"></div>
+      <div class="hero__bg b"></div>
+      <div class="hero__bg c"></div>
     </section>
 
     <div class="accent"></div>
@@ -370,45 +374,86 @@
           </dl>
         </div>
 
+        <!-- 写真リスト・モーダル -->
         <div class="aboutPhotos__wrap pc">
           <ul class="aboutPhotos__list">
             <li class="aboutPhotos__item">
-              <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto01.webp" alt="店内の様子-音楽ゲームを遊ぶ男性">
+              <a class="aboutPhotos__link" href="assets/images/imgStorePhoto01.webp">
+                <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto01.webp" alt="店内の様子-音楽ゲームを遊ぶ男性" loading="lazy">
+              </a>
             </li>
             <li class="aboutPhotos__item">
-              <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto02.webp" alt="店内の様子-レトロゲームの筐体が並ぶエリア">
+              <a class="aboutPhotos__link" href="assets/images/imgStorePhoto02.webp">
+                <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto02.webp" alt="店内の様子-レトロゲームの筐体が並ぶエリア" loading="lazy">
+              </a>
             </li>
             <li class="aboutPhotos__item">
-              <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto03.webp" alt="店内の様子-麻雀ゲームの筐体が並ぶエリア">
+              <a class="aboutPhotos__link" href="assets/images/imgStorePhoto03.webp">
+                <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto03.webp" alt="店内の様子-麻雀ゲームの筐体が並ぶエリア" loading="lazy">
+              </a>
             </li>
             <li class="aboutPhotos__item">
-              <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto04.webp" alt="店内の様子-店内カウンター">
+              <a class="aboutPhotos__link" href="assets/images/imgStorePhoto04.webp">
+                <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto04.webp" alt="店内の様子-店内カウンター" loading="lazy">
+              </a>
             </li>
             <li class="aboutPhotos__item">
-              <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto05.webp" alt="店舗入り口・外観">
+              <a class="aboutPhotos__link" href="assets/images/imgStorePhoto05.webp">
+                <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto05.webp" alt="店舗入り口・外観" loading="lazy">
+              </a>
             </li>
             <li class="aboutPhotos__item">
-              <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto06.webp" alt="店内の様子-音楽ゲームを遊ぶ男子たち">
+              <a class="aboutPhotos__link" href="assets/images/imgStorePhoto06.webp">
+                <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto06.webp" alt="店内の様子-音楽ゲームを遊ぶ男子たち" loading="lazy">
+              </a>
             </li>
             <li class="aboutPhotos__item">
-              <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto07.webp" alt="店内の様子-レトロゲームの筐体">
+              <a class="aboutPhotos__link" href="assets/images/imgStorePhoto07.webp">
+                <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto07.webp" alt="店内の様子-レトロゲームの筐体" loading="lazy">
+              </a>
             </li>
             <li class="aboutPhotos__item">
-              <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto08.webp" alt="店内の様子-男女の二人組が店内を見て回っている">
+              <a class="aboutPhotos__link" href="assets/images/imgStorePhoto08.webp">
+                <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto08.webp" alt="店内の様子-男女の二人組が店内を見て回っている" loading="lazy">
+              </a>
             </li>
             <li class="aboutPhotos__item">
-              <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto09.webp" alt="店内の様子-レースゲーム・シューティングゲームの並ぶエリア">
+              <a class="aboutPhotos__link" href="assets/images/imgStorePhoto09.webp">
+                <img class="aboutPhotos__photo" src="assets/images/imgStorePhoto09.webp" alt="店内の様子-レースゲーム・シューティングゲームの並ぶエリア" loading="lazy">
+              </a>
             </li>
           </ul>
+        </div><!-- aboutPhotos__wrap -->
+      </div><!-- aboutGrid -->
+
+      <!-- スライダー 一番上で表示非表示切り替え-->
+      <!-- swiperアセットに非表示用クラスを付けても、後付けのクラスに上書きされて消えないので親を作って消す -->
+      <div class="sp">
+        <div class="swiper mySlider" aria-label="店内写真スライダー">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="assets/images/imgStorePhoto01.webp" alt="店内の様子-音楽ゲームを遊ぶ男性">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/images/imgStorePhoto02.webp" alt="店内の様子-レトロゲームの筐体が並ぶエリア">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/images/imgStorePhoto03.webp" alt="店内の様子-麻雀ゲームの筐体が並ぶエリア">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/images/imgStorePhoto04.webp" alt="店内の様子-店内カウンター">
+            </div>
+          </div>
+
+          <!-- ドット -->
+          <div class="swiper-pagination"></div>
         </div>
 
       </div>
-      <div class="div--temporary sp" aria-label="店内の写真">
-        <img  class="images--temporary" src="assets/images/temp/imgCarousel.png" alt="店内写真の仮カルーセル画像">
-      </div>
+
 
       <div class="about__cta sp">
-        <a class="btn btn--about" href="#top">店内をもっと見る</a>
+        <a class="btn btn--about" href="about.html">店内をもっと見る</a>
       </div>
 
       <div class="aboutGames pc">
@@ -546,56 +591,55 @@
           <h3 class="subTitle subTitle--qa">よくある質問</h3>
       </header>
 
-      <div class="div--temporary div--temporary--qa" aria-label="質問と回答の仮画像">
-        <img  class="images--temporary images--temporary--qa sp" src="assets/images/temp/imgQuestions.jpg" alt="Q&Aの仮画像">
-        <img  class="images--temporary images--temporary--qa pc" src="assets/images/temp/imgQuestions--pc.jpg" alt="Q&Aの仮画像--pc用">
-      </div>
-
-      <!-- <div class="accordion">
-        <details class="qa" open>
+      <div class="accordion">
+        <details class="qa">
           <summary class="qa__q">
             <span class="qa__label">Q.</span>
-            どのようなゲームが遊べますか？
+            <span class="qa__title">どのようなゲームが<br class="sp">レンタルできますか？</span>
             <span class="qa__icon" aria-hidden="true"></span>
           </summary>
           <div class="qa__a">
-            <p><span class="qa__label">A.</span> 音楽・格闘・対戦・レース・麻雀などの最新機種をはじめ、シューティング・ベルトスクロールアクション・レトロビデオゲームを中心に取り揃えています。</p>
+            <span class="qa__label">A.</span>
+            <p>音楽・格闘・対戦・レース・麻雀ゲームなどの最新機種をはじめ、シューティング・ベルトスクロールアクション・レトロビデオゲームなどがレンタル可能です。</p>
           </div>
         </details>
 
         <details class="qa">
           <summary class="qa__q">
             <span class="qa__label">Q.</span>
-            イベント利用の相談はどうすればいいですか？
+            <span class="qa__title">イベント利用の相談は<br class="sp">どうすればいいですか？</span>
             <span class="qa__icon" aria-hidden="true"></span>
           </summary>
           <div class="qa__a">
-            <p><span class="qa__label">A.</span> XのDMにて受け付けております。人数・希望日時・内容(レンタルしたい機種ややりたいこと)をお送りください。</p>
+            <span class="qa__label">A.</span>
+            <p>XのDMにて受け付けております。人数・希望日時・内容(レンタルしたい機種ややりたいこと)をお送りください。</p>
           </div>
         </details>
 
         <details class="qa">
           <summary class="qa__q">
             <span class="qa__label">Q.</span>
-            ゲームレンタルやイベント利用の料金はどれくらいですか？
+            <span class="qa__title">ゲームレンタルやイベント利用料金はどれくらいですか？</span>
             <span class="qa__icon" aria-hidden="true"></span>
           </summary>
           <div class="qa__a">
-            <p><span class="qa__label">A.</span> 機材・時間・内容によって変動します。レンタルしたい機種、日時などが決まりましたら、XのDMで概要をご相談ください。</p>
+            <span class="qa__label">A.</span>
+            <p>機材・時間・内容によって変動します。レンタルしたい機種、日時などが決まりましたら、XのDMで概要をご相談ください。</p>
           </div>
         </details>
 
         <details class="qa">
           <summary class="qa__q">
             <span class="qa__label">Q.</span>
-            アルバイトは募集していますか？
+            <span class="qa__title">アルバイトは<br class="sp">募集していますか？</span>
             <span class="qa__icon" aria-hidden="true"></span>
           </summary>
           <div class="qa__a">
-            <p><span class="qa__label">A.</span> 募集時はXで告知します。最新情報をご確認ください。</p>
+            <span class="qa__label">A.</span>
+            <p>現在、アルバイトの募集はしておりません。再募集の際はXアカウントにて告知しますのでアカウントのフォローをお願いします。</p>
           </div>
         </details>
-      </div>accordion -->
+      </div><!-- accordion -->
 
 
       <div class="qa__cta">
@@ -635,27 +679,38 @@
 
   <!-- ========== Footer ========== -->
   <footer class="footer">
-    <div class="footer__top">
-      <p class="sectionTitle__text sectionTitle__text--footer">WONDER <span>in</span> EKODA</p>
+    <div class="footer__wrap">
+      <div class="footer__top">
+        <p class="sectionTitle__text sectionTitle__text--footer">WONDER <span>in</span> EKODA</p>
+        <nav class="gnav gnav--footer pc" aria-label="フッターナビゲーション">
+          <ul class="gnav__list gnav__list--footer">
+            <li class="gnav__item gnav__item--footer"><a href="#about">ABOUT</a></li>
+            <li class="gnav__item gnav__item--footer"><a href="#access">ACCESS</a></li>
+            <li class="gnav__item gnav__item--footer"><a href="#service">SERVICE</a></li>
+            <li class="gnav__item gnav__item--footer"><a href="#qa">Q&amp;A</a></li>
+          </ul>
+        </nav>
+      </div>
 
-      <div class="access__info">
+      <div class="access__info--footer">
         <dl class="access__list access__list--footer">
-          <div class="access__item is--full">
+          <div class="access__item access__item--footer is--full">
             <dt>住所</dt>
             <dd>〒176-0005<br> 東京都 練馬区 旭丘1丁目 XX-YY 夢野ビル 2F</dd>
           </div>
-          <div class="access__item">
+          <div class="access__item access__item--footer footer__item--line--pc">
             <dt>営業時間</dt>
             <dd>11:00 - 24:00</dd>
           </div>
-          <div class="access__item footer__item--line">
+          <div class="access__item access__item--footer footer__item--line">
             <dt>店休日</dt>
             <dd>1月1日のみ休業</dd>
           </div>
         </dl>
+        <a class="snsX footer__X--logo pc" href="https://x.com/" target="_blank" rel="noopener noreferrer">X</a>
       </div>
 
-      <nav class="gnav gnav--footer" aria-label="フッターナビゲーション">
+      <nav class="gnav gnav--footer sp" aria-label="フッターナビゲーション">
         <ul class="gnav__list gnav__list--footer">
           <li class="gnav__item gnav__item--footer"><a href="#about">ABOUT</a></li>
           <li class="gnav__item gnav__item--footer"><a href="#access">ACCESS</a></li>
@@ -663,16 +718,31 @@
           <li class="gnav__item gnav__item--footer"><a href="#qa">Q&amp;A</a></li>
         </ul>
       </nav>
-      <a class="snsX footer__X--logo" href="https://x.com/" target="_blank" rel="noopener noreferrer">X</a>
-    </div>
+      <a class="snsX footer__X--logo sp" href="https://x.com/" target="_blank" rel="noopener noreferrer">X</a>
 
-    <div class="footer__copy">
-      <small class="copy"> 2025&copy; Wonder in Ekoda</small><br>
-      <small class="copy__info">※上記は架空の店舗・サービスです</small>
+
+      <div class="footer__copy">
+        <small class="copy"> 2025&copy; Wonder in Ekoda</small><br>
+        <small class="copy__info">※上記は架空の店舗・サービスです</small>
+      </div>
     </div>
     <button class="btn__toTop">
       <a href="#top" aria-label="ページトップへ"></a>
     </button>
   </footer>
+
+  <!-- モーダル実装ChatGPTコピペ photoModalがコンテナ、
+   jsでクリックしたリストの写真の情報を取り込み photoModal__imgのaltに入れ込む-->
+  <dialog class="photoModal" id="photoModal">
+    <button class="photoModal__close" type="button" aria-label="閉じる">×</button>
+    <figure class="photoModal__figure">
+      <img class="photoModal__img" alt="">
+    </figure>
+  </dialog>
+
+  <!-- ===== javascript ===== -->
+  <!-- Swiper JS スライダ用ライブラリ-->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
