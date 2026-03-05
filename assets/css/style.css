@@ -8,7 +8,7 @@
 }
 
 html {
-  /* scroll-behavior: smooth; */
+  scroll-behavior: smooth;
   text-decoration: none;
   scrollbar-gutter: stable;
 }
@@ -28,6 +28,22 @@ svg {
   backface-visibility: hidden;
 }
 
+.type-js {
+  font-size: 2em;
+  border-right: .1em solid #333;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+}
+
+
+/* ==============================
+        スクロールバー非表示(発表会用)
+============================== */
+
+html.is-preview::-webkit-scrollbar,
+body.is-preview::-webkit-scrollbar { display: none; width: 0; height: 0; }
+html.is-preview, body.is-preview { scrollbar-width: none; -ms-overflow-style: none; }
 
 /* ==============================
         custom-properties
@@ -65,7 +81,7 @@ svg {
         animation
 ============================== */
 
-/* メインビューの中身のほんのり移動用 */
+/* メインビューの中身のほんのり移動用 PCは少しうっとうしいのでアニメーションnoneに*/
 @keyframes panX {
   0% {
     transform: translateX(0);}
@@ -75,25 +91,12 @@ svg {
     transform: translateX(0);}
 }
 
-/* PCは移動量が大きくなりすぎるので値を調整 */
-@keyframes panX-PC {
-  0% {
-    transform: translateX(0);}
-  50% {
-    transform: translateX(-1%);}
-  100% {
-    transform: translateX(0);}
-}
-
 
 /* セクションタイトル横のキーカーソル用 */
 @keyframes cursorAnimation {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
+  50% {
+    border-color: transparent;
+  }
 }
 
 /* モーダルの表示時にふんわり出す用 */
@@ -117,6 +120,32 @@ svg {
   }
 }
 
+@keyframes typingAnimation {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes rotationAnimation {
+  0% {
+    opacity: 0;}
+  40% {
+    opacity: 1;
+    transform: rotate(0deg);}
+  60%{
+    transform: rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-15deg);}
+}
+
+@keyframes btnFlash{
+  100%{
+    left: 120%;
+  }
+}
+
 
 /* ==============================
             common
@@ -128,20 +157,40 @@ svg {
 }
 
 .btn {
+  position: relative;
   display: flex;
-  width: min(362px, 100%);
-  padding: 20px 20px;
+  width: min(362px, 96%);
+  padding: 22px 20px;
   justify-content: center;
   align-items: center;
   gap: 20px;
   margin: 0 auto;
   background: var(--blue, #0008E6);
+  box-shadow: 2px 2px 2px rgba(0, 0, 105, 0.4);
 
   font-size: var(--fs-sectionItem-20);
   font-weight: var(--fw-medium);
   line-height: 1;
   color: white;
   white-space: nowrap;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.btn::before{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: -120%;
+  width: 100%;
+  height: 100%;
+  background: rgba(188, 190, 255, 0.6);
+  transform: skewX(-30deg);
+  transition: 0.4s;
+}
+
+.btn:hover::before{
+  animation: btnFlash 0.3s ease;
 }
 
 .btn::after {
@@ -158,7 +207,16 @@ svg {
   width: 100%;
   height: 10px;
   background-image: url(../images/imgAccentHolo.webp);
-  background-size: 100%;
+  overflow: hidden;
+}
+
+
+.accent__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
 }
 
 .accent--var01 {
@@ -219,18 +277,18 @@ li {
   padding: 120px 4.97% 60px;
   overflow-x: clip;
   text-align: center;
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .sectionTitle {
   display: flex;
-  justify-content: center;
   position: relative;
+  justify-content: center;
   padding: 0 0 40px 0;
 }
 
 .sectionTitle__text {
-  position: relative;
+  padding-right: 2px ;
   font-family: "Anton", sans-serif;
   font-size: var(--fs-sectionTitle-40);
   font-weight: var(--fw-regular);
@@ -239,18 +297,21 @@ li {
   text-align: center;
   color: var(--blue, #0008E6);
   transform: skew(var(--tf-skew));
-}
 
-.sectionTitle__text::after {
-  content: "";
-  position: absolute;
   height: var(--fs-sectionTitle-40);
-  right: -5px;
-  border-right:1px solid  black;
+  border-right: 1px solid  black;
   animation: cursorAnimation 1.2s step-start 0s infinite normal both running;
+
 }
 
 .sectionTitle__ghost {
+  position: absolute;
+  top: -0.5em;
+  transform: skew(var(--tf-skew));
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+
   font-family: "Anton SC", sans-serif;
   font-size: var(--fs-ghost-120);
   line-height: 0.88;
@@ -260,12 +321,6 @@ li {
   -webkit-text-stroke-color: rgba(0, 8, 230, 0.15);
   color: transparent;
 
-  position: absolute;
-  transform: skew(var(--tf-skew));
-  top: -0.5em;
-  align-items: center;
-  text-align: center;
-  pointer-events: none;
 }
 
 .subTitle {
@@ -290,9 +345,16 @@ li {
   height: 36px;
   top: -11px;
   left: -16px;
-  transform: rotate(-15deg);
+  transform: rotate(0deg);
   background-image: url(../images/imgAccent01.png);
   background-size: cover;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.subTitle.is-animated::before {
+  opacity: 0;
+  animation: rotationAnimation 0.4s linear forwards;
 }
 
 .subText {
@@ -409,7 +471,7 @@ li {
 .hero__logo {
   z-index: 10;
   margin: 0 auto;
-  width: 280px;
+  width: 260px;
   height: auto;
   aspect-ratio: 1.97 / 1;
   white-space: nowrap;
@@ -441,6 +503,7 @@ li {
 
   .btn--hero {
     margin-top: 20px;
+    padding-block: 24px;
     background-color: rgba(0, 8, 230, 0.9);
    }
 }
@@ -548,7 +611,11 @@ li {
             about-Page
   ============================== */
 .section--about--page {
-  padding-top: 180px;
+  padding: 180px 4.97% 60px;
+}
+
+.aboutGrid--page{
+  padding:0;
 }
 
 .aboutPhotos__wrap {
@@ -581,6 +648,7 @@ li {
   }
   .aboutPhotos__photo:hover {
     transform: scale(1.05);
+    filter: brightness(1.2);
   }
 }
 
@@ -631,7 +699,7 @@ li {
   padding-bottom: 120px;
 }
 
-/*=========== スライダ用 ChatGPTコピペ ===========*/
+/*=========== スライダ用 ChatGPT出力＋調整 ===========*/
 
 
 .section--about .mySlider {
@@ -814,7 +882,7 @@ li {
 /* 右上のコーナーを削る処理  */
 .service__card {
   border-top-right-radius: 20px;
-  corner-shape: bevel;
+  corner-shape: bevel;  /* VSCodeでcorner-shapeがフォローされていないためかcautionになる */
   overflow: hidden;
 }
 
@@ -982,7 +1050,7 @@ details {
   padding-bottom: 40px;
 }
 
-/* === 外部サイトからのコピペ ===*/
+/* === 外部サイトからの参考コード ===*/
 /* 古いブラウザに対応させるために下記を記載する */
 @supports (interpolate-size: allow-keywords) {
   :root {
@@ -1000,7 +1068,7 @@ details {
     overflow-y: scroll;
   }
 }
-/* === 外部サイトからのコピペ ===*/
+/* === 外部サイトからの参考コード ===*/
 
 
   /* ==============================
@@ -1026,14 +1094,11 @@ details {
 .sectionTitle__text--footer {
   font-family: "Anton", sans-serif;
   color: var(--green);
+  border: none;
 
   span {
     font-size: var(--fs-subTitle-24);
   }
-}
-
-.sectionTitle__text--footer::after {
-  display: none;
 }
 
 .access__info--footer {
@@ -1132,6 +1197,34 @@ details {
   display: none;
 }
 
+/* スクロールフェードイン初期状態（まだ出てない） */
+.section.js-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.2s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+}
+
+/* 表示状態 */
+.js-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 連続で出す時の“間”が欲しければ任意 */
+.js-reveal[data-delay] {
+  transition-delay: var(--delay, 0ms);
+}
+
+/* アクセシビリティ：動きが苦手な人にはアニメ無し */
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
 
 /* ============================================================
                     media query - forPC
@@ -1190,11 +1283,33 @@ details {
   }
 
   .menu {
-    width: min(400px, 100%);
+    width: min(600px, 100%);
   }
 
   .gnav__item+.gnav__item {
     border-style: none;
+  }
+
+  .gnav__item a{
+    position: relative;
+    display: inline-block;
+  }
+
+  .gnav__item a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    bottom: -1px;
+    background-color: var(--blue);
+    transform-origin: center top;
+    transform: scale(0, 1);
+    transition: transform 0.2s;
+  }
+
+  .gnav__item a:hover::after {
+    transform: scale(1, 1); /*ホバー後、x軸方向に1（相対値）伸長*/
   }
 
 
@@ -1242,11 +1357,12 @@ details {
 
     .btn--hero {
     margin-top: 10px;
+    width: 300px;
     }
   }
 
   .hero__bg {
-  animation: none;
+    animation: none;
   }
 
   /* ==============================
@@ -1542,5 +1658,14 @@ details {
   }
 
 }
+  /* ==============================
+                js
+  ============================== */
 
 
+
+
+.js .type-js.is-typing,
+.js .type-js.is-typed {
+  visibility: visible;
+}

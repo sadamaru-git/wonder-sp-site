@@ -318,11 +318,6 @@
     </section>
 
     <div class="accent" aria-hidden="true"></div>
-    <!-- <div class="accent" aria-hidden="true">
-      <video class="accent__video" autoplay muted playsinline loop="true" preload="metadata">
-          <source src="assets/images/movHoloAnim_lp.mp4" type="video/mp4">
-      </video>
-    </div> -->
 
     <!-- ========== SPmenu ========== -->
     <section class="menu sp">
@@ -673,8 +668,20 @@
     </section>
   </main>
 
-  <div class="accent accent--var01" aria-hidden="true"></div>
-
+  <!-- <div class="accent accent--var01" aria-hidden="true"></div> -->
+  <!-- アクセント用ビデオ -->
+  <div class="accent" aria-hidden="true">
+    <video
+      class="accent__video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+    >
+      <source src="assets/images/movHoloAnim_lp.mp4" type="video/mp4">
+    </video>
+  </div>
   <!-- ========== Footer ========== -->
   <footer class="footer js-reveal">
     <div class="footer__wrap">
@@ -724,10 +731,13 @@
         <small class="copy__info">※上記は架空の店舗・サービスです</small>
       </div>
     </div>
-    <button class="btn__toTop">
-      <a href="#top" aria-label="ページトップへ"></a>
-    </button>
   </footer>
+
+  <!-- トップに戻るボタン。フッター内だとtransformでfixedの挙動が意図しなくなるのでbody直下へ配置 -->
+  <button class="btn__toTop">
+    <a href="#top" aria-label="ページトップへ"></a>
+  </button>
+
 
   <!-- モーダル実装ChatGPTコピペ photoModalがコンテナ、
    jsでクリックしたリストの写真の情報を取り込み photoModal__imgのaltに入れ込む-->
@@ -738,9 +748,12 @@
     </figure>
   </dialog>
 
+
   <!-- ===== javascript ===== -->
   <!-- Swiper JS スライダ用ライブラリ-->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/previewSP.js"></script>
+
 </body>
 </html>

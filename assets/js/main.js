@@ -19,7 +19,6 @@ setInterval(() => {
 
 
 //===== スライダー用の設定 =====
-
 const swiperEl = document.querySelector('.swiper');
 
 if (swiperEl && typeof Swiper !== 'undefined') {
@@ -39,24 +38,11 @@ if (swiperEl && typeof Swiper !== 'undefined') {
     },
   });
 }
-// const swiper = new Swiper(".mySlider", {
-//   loop: true,
-//   centeredSlides: true,
-//   slidesPerView: "auto",
-//   spaceBetween: 20,
-//   initialSlide: 1,
-//   pagination: {
-//     el: ".swiper-pagination",
-//     clickable: true,
-//   },
-//   breakpoints: {
-//     768: { slidesPerView: 1.6, spaceBetween: 32 },
-//     1024:{ slidesPerView: 1.9, spaceBetween: 40 },
-//   },
-// });
 
 
-//===== モーダル関連 =====
+// =========================
+// モーダル関連
+// =========================
 document.addEventListener('DOMContentLoaded', () => {
   const dialog = document.getElementById('photoModal');
   if (!dialog) return;
@@ -98,8 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-
-//HTML内の写真リストのaタグをすべて取得して、forEachで一つ一つに対して処理を行う（関数の埋め込み）
+  //HTML内の写真リストのaタグをすべて取得して、forEachで一つ一つに対して処理を行う（関数の埋め込み）
   document.querySelectorAll('.aboutPhotos__link').forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault(); //HTMLの本来の動作を制限する。ここではaタグでのページ遷移をさせなくする
@@ -153,16 +138,131 @@ document.addEventListener('DOMContentLoaded', () => {
 //ここまでモーダル関連
 
 
-//トップに戻るボタン
+
+// =========================
+// トップに戻るボタン
+// =========================
 const btn = document.querySelector('.btn__toTop');
 
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  console.log(scrollY);
-
   if (scrollY > 300) {
     btn.classList.add('is-show');
   } else {
     btn.classList.remove('is-show');
   }
 });
+
+
+
+
+// ==================================================
+// スクロールフェード・タイピング処理
+// ==================================================
+//DOMContentLoadでロードしたときにすべての処理を仕込んでおく。
+document.addEventListener('DOMContentLoaded', () => {
+
+  // タイピング：初期化（文字退避→消す）
+  const typeTargets = document.querySelectorAll('.type-js');
+
+  typeTargets.forEach((el) => {
+    el.dataset.typeText = el.textContent.trim();
+    el.textContent = '';
+  });
+
+  // タイピング本体の関数宣言
+  function typeEffect(el, speed = 80) {
+    const text = el.dataset.typeText;
+    if (!text) return;
+
+    el.classList.add('is-typing');
+    el.textContent = '';
+
+    let index = 0;
+    function typing() {
+      if (index < text.length) {
+        el.textContent += text.charAt(index);
+        index++;
+        setTimeout(typing, speed);
+      } else {
+        el.classList.remove('is-typing');
+        el.classList.add('is-typed');
+      }
+    }
+    typing();
+  } // ここまで-タイピング本体
+
+
+  // セクションフェード + フェード後にタイピング開始
+  const sections = document.querySelectorAll('.js-reveal');
+  if (!sections.length) return;
+
+  // IntersectionObserver(監視対象)が無い場合のフォールバック
+  // IOがなかったら即座にis-Visibleを付与して表示+typeEffectを実行
+  if (!('IntersectionObserver' in window)) {
+    sections.forEach(sec => {
+      sec.classList.add('is-visible');
+      sec.querySelectorAll('.type-js').forEach(el => {
+        if (!el.classList.contains('is-typed')) typeEffect(el, 80);
+      });
+    });
+    return;
+  }
+
+  //スクロール判定はすべてここで行う
+  //IOは指定した要素を監視する機能を持ち、ここで定数に代入する。何を監視するかは後述
+  const io = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const section = entry.target;
+      section.classList.add('is-visible');
+
+      // “opacityのtransitionが終わったら” タイピング開始の関数を入れる
+      const onEnd = (e) => {
+        // セクションのアニメーションが完了したかどうかの判定
+        if (e.target !== section) return;
+        if (e.propertyName !== 'opacity') return;//もしopacityでないプロパティだったら処理をやめる
+
+        //実際のタイピングエフェクト処理を行う部分。section内のtype用オブジェクトを取り出す
+        section.querySelectorAll('.type-js').forEach(el => {
+          if (!el.classList.contains('is-typed')) {
+            setTimeout(() => {
+              typeEffect(el, 60);
+            }, 300); //タイピングの再生遅延時間（ms）
+          }
+        });
+
+        section.removeEventListener('transitionend', onEnd);
+      };
+
+      section.addEventListener('transitionend', onEnd);
+
+      observer.unobserve(section);
+    });
+  }, {
+    threshold: 0.1,//要素が何％画面に入ったか
+    rootMargin: '0px 0px -10% 0px',//発火地点の指定。ここでは画面の下端10％を要素が10％超えたら。となっている。
+  });//IntersectionObserver処理の終わり
+
+  //IOを格納した定数ioにメソッドobserveで監視対象を指定する
+  sections.forEach(sec => io.observe(sec));
+
+
+  //サブタイトル用IO
+  const subTitles = document.querySelectorAll('.subTitle');
+
+  const ioSub = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      entry.target.classList.add('is-animated'); // 直接クラスを付与
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0,
+    rootMargin: '0px 0px -40% 0px',
+  });
+
+  subTitles.forEach(el => ioSub.observe(el));
+});//DOMContentloadedの終わり

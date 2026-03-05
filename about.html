@@ -40,14 +40,6 @@
       <header class="section__head">
         <div class="sectionTitle">
           <h2 class="sectionTitle__text" data-title="ABOUT">ABOUT</h2>
-          <!-- 一文字づつアニメーションさせるために分離する場合は下記のスタイルをとる。いったん置き -->
-          <!-- <div class="test">
-            <span class="sectionTitle__text">A</span>
-            <span class="sectionTitle__text">B</span>
-            <span class="sectionTitle__text">O</span>
-            <span class="sectionTitle__text">U</span>
-            <span class="sectionTitle__text">T</span>
-          </div> -->
           <span class="sectionTitle__ghost" aria-hidden="true">ABOUT</span>
         </div>
 
@@ -106,7 +98,7 @@
           </ul>
         </div><!-- aboutPhotos__wrap -->
 
-      <div class="aboutGrid">
+      <div class="aboutGrid aboutGrid--page">
         <div class="aboutText">
           <h3 class="subTitle subTitle--reason">安心して遊べる理由</h3>
           <p class="reason__text">安心してゲームを楽しめるよう、当店では以下の安全・防犯への取り組みを行っています</p>
@@ -256,7 +248,19 @@
     </section>
   </main>
 
-  <div class="accent accent--var01"></div>
+  <!-- アクセント用ビデオ -->
+  <div class="accent" aria-hidden="true">
+    <video
+      class="accent__video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+    >
+      <source src="assets/images/movHoloAnim_lp.mp4" type="video/mp4">
+    </video>
+  </div>
 
   <!-- ========== Footer ========== -->
   <footer class="footer">
@@ -306,11 +310,11 @@
         <small class="copy__info">※上記は架空の店舗・サービスです</small>
       </div>
     </div>
-    <button class="btn__toTop">
-      <a href="#top" aria-label="ページトップへ"></a>
-    </button>
   </footer>
 
+  <button class="btn__toTop">
+    <a href="#top" aria-label="ページトップへ"></a>
+  </button>
 
   <!-- モーダル実装ChatGPTコピペ photoModalがコンテナ、
    jsでクリックしたリストの写真の情報を取り込み photoModal__imgのaltに入れ込む-->
@@ -323,5 +327,6 @@
 
   <!-- ===== javascript ===== -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/previewSP.js"></script>
 </body>
 </html>
