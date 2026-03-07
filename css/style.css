@@ -37,7 +37,13 @@ svg {
 }
 
 
+/* ==============================
+        スクロールバー非表示(発表会用)
+============================== */
 
+html.is-preview::-webkit-scrollbar,
+body.is-preview::-webkit-scrollbar { display: none; width: 0; height: 0; }
+html.is-preview, body.is-preview { scrollbar-width: none; -ms-overflow-style: none; }
 
 /* ==============================
         custom-properties
@@ -120,6 +126,27 @@ svg {
   }
 }
 
+@keyframes rotationAnimation {
+  0% {
+    opacity: 0;}
+  40% {
+    opacity: 1;
+    transform: rotate(0deg);}
+  60%{
+    transform: rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-15deg);}
+}
+
+@keyframes btnFlash{
+  100%{
+    left: 120%;
+  }
+}
+
+
 /* ==============================
             common
 ============================== */
@@ -130,6 +157,7 @@ svg {
 }
 
 .btn {
+  position: relative;
   display: flex;
   width: min(362px, 96%);
   padding: 22px 20px;
@@ -145,6 +173,24 @@ svg {
   line-height: 1;
   color: white;
   white-space: nowrap;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.btn::before{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: -120%;
+  width: 100%;
+  height: 100%;
+  background: rgba(188, 190, 255, 0.6);
+  transform: skewX(-30deg);
+  transition: 0.4s;
+}
+
+.btn:hover::before{
+  animation: btnFlash 0.3s ease;
 }
 
 .btn::after {
@@ -299,9 +345,16 @@ li {
   height: 36px;
   top: -11px;
   left: -16px;
-  transform: rotate(-15deg);
+  transform: rotate(0deg);
   background-image: url(../images/imgAccent01.png);
   background-size: cover;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.subTitle.is-animated::before {
+  opacity: 0;
+  animation: rotationAnimation 0.4s linear forwards;
 }
 
 .subText {
@@ -418,7 +471,7 @@ li {
 .hero__logo {
   z-index: 10;
   margin: 0 auto;
-  width: 280px;
+  width: 260px;
   height: auto;
   aspect-ratio: 1.97 / 1;
   white-space: nowrap;
@@ -558,7 +611,11 @@ li {
             about-Page
   ============================== */
 .section--about--page {
-  padding-top: 180px;
+  padding: 180px 4.97% 60px;
+}
+
+.aboutGrid--page{
+  padding:0;
 }
 
 .aboutPhotos__wrap {
@@ -591,6 +648,7 @@ li {
   }
   .aboutPhotos__photo:hover {
     transform: scale(1.05);
+    filter: brightness(1.2);
   }
 }
 
@@ -641,7 +699,7 @@ li {
   padding-bottom: 120px;
 }
 
-/*=========== スライダ用 ChatGPTコピペ ===========*/
+/*=========== スライダ用 ChatGPT出力＋調整 ===========*/
 
 
 .section--about .mySlider {
@@ -693,7 +751,7 @@ li {
   background: var(--blue);
 }
 
-/*=========== モーダル実装ChatGPTコピペ ===========*/
+/*=========== モーダル実装 ===========*/
 
 .photoModal {
   position:fixed;/* fixedで決まった位置に出す */
@@ -824,7 +882,7 @@ li {
 /* 右上のコーナーを削る処理  */
 .service__card {
   border-top-right-radius: 20px;
-  corner-shape: bevel;
+  corner-shape: bevel;  /* VSCodeでcorner-shapeがフォローされていないためかcautionになる */
   overflow: hidden;
 }
 
@@ -992,7 +1050,7 @@ details {
   padding-bottom: 40px;
 }
 
-/* === 外部サイトからのコピペ ===*/
+/* === 外部サイトからの参考コード ===*/
 /* 古いブラウザに対応させるために下記を記載する */
 @supports (interpolate-size: allow-keywords) {
   :root {
@@ -1010,7 +1068,7 @@ details {
     overflow-y: scroll;
   }
 }
-/* === 外部サイトからのコピペ ===*/
+/* === 外部サイトからの参考コード ===*/
 
 
   /* ==============================
@@ -1036,14 +1094,11 @@ details {
 .sectionTitle__text--footer {
   font-family: "Anton", sans-serif;
   color: var(--green);
+  border: none;
 
   span {
     font-size: var(--fs-subTitle-24);
   }
-}
-
-.sectionTitle__text--footer::after {
-  display: none;
 }
 
 .access__info--footer {
@@ -1233,6 +1288,28 @@ details {
 
   .gnav__item+.gnav__item {
     border-style: none;
+  }
+
+  .gnav__item a{
+    position: relative;
+    display: inline-block;
+  }
+
+  .gnav__item a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    bottom: -1px;
+    background-color: var(--blue);
+    transform-origin: center top;
+    transform: scale(0, 1);
+    transition: transform 0.2s;
+  }
+
+  .gnav__item a:hover::after {
+    transform: scale(1, 1); /*ホバー後、x軸方向に1（相対値）伸長*/
   }
 
 
@@ -1504,9 +1581,9 @@ details {
     padding-bottom: 10px;
   }
 
-  /* ========== footer-PC ========== */
-  /* ========== footer-PC ========== */
-  /* ========== footer-PC ========== */
+  /* ==============================
+              footer-PC
+  ============================== */
 
   .footer {
     padding-top: 90px;
@@ -1582,13 +1659,12 @@ details {
 
 }
   /* ==============================
-                js
+          jsクラス切り替え
   ============================== */
-
-
 
 
 .js .type-js.is-typing,
 .js .type-js.is-typed {
   visibility: visible;
 }
+
